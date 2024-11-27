@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+strong {
+  font-weight: bold;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }}</title>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p><strong>Description:</strong> {{ book.description }}</p>
+    <p><strong>Author:</strong> {{ book.author.name }}</p>
+    <p><strong>Categories:</strong>
+        {% for category in book.category.all %}
+            {{ category.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p><strong>Rating:</strong> {{ book.rating }}</p>
+
+    <a href="{% url 'update_book' book.id %}">Edit</a>
+    <a href="{% url 'delete_book' book.id %}">Delete</a>
+    <a href="{% url 'book_list' %}">Back to Book List</a>
+</body>
+</html>
